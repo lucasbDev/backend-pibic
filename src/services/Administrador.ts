@@ -1,8 +1,8 @@
-import { Prisma, PrismaClient } from '@prisma/client';
+import { Prisma, PrismaClient, Administrador } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function criarAdministrador(data: Prisma.AdministradorCreateInput) {
+export async function criarAdministrador(data: Prisma.AdministradorCreateInput): Promise<Administrador> {
   const administrador = await prisma.administrador.create({ data });
   return administrador;
 }

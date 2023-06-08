@@ -21,7 +21,8 @@ export async function obterProfessorPorId(id: string) {
   return professor;
 }
 
-export async function obterTodosProfessores() {
-  const professores = await prisma.professor.findMany();
-  return professores;
+export async function obterProfessor() {
+  const professor = await prisma.professor.findMany();
+
+  return professor;
 }

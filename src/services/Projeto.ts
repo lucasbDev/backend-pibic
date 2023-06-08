@@ -22,6 +22,11 @@ export async function obterProjetoPorId(id: string) {
 }
 
 export async function obterTodosProjetos() {
-  const projetos = await prisma.projeto.findMany();
+  const projetos = await prisma.projeto.findMany({
+    include: {
+      Professor: true,
+      Aluno: true
+    }
+  });
   return projetos;
 }

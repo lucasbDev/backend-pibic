@@ -2,13 +2,18 @@ import { Request, Response } from 'express';
 import * as professorService from '../services/Professor';
 
 export async function criarProfessor(req: Request, res: Response) {
-  const { nome, email, matricula, curso } = req.body;
+  const { nome, email, matricula, curso, projetoId } = req.body;
 
   const professor = await professorService.criarProfessor({
     nome,
     email,
     matricula,
     curso,
+    projeto: {
+      connect: {
+        id: projetoId
+      }
+    }
   });
 
   res.json(professor);
@@ -53,7 +58,7 @@ export async function obterProfessorPorId(req: Request, res: Response) {
 }
 
 export async function obterTodosProfessores(req: Request, res: Response) {
-  const professores = await professorService.obterTodosProfessores();
+  const professores = await professorService.obterProfessor();
 
   res.json(professores);
 }

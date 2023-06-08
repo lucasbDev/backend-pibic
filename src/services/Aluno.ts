@@ -1,4 +1,4 @@
-import { Prisma, PrismaClient } from '@prisma/client';
+import { Prisma, PrismaClient, Aluno } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -22,6 +22,8 @@ export async function obterAlunoPorId(id: string) {
 }
 
 export async function obterTodosAlunos() {
-  const alunos = await prisma.aluno.findMany();
-  return alunos;
+  const aluno = await prisma.aluno.findMany();
+
+  return aluno;
 }
+

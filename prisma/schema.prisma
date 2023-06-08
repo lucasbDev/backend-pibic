@@ -20,64 +20,48 @@ model Administrador {
   updatedAt DateTime  @updatedAt
 }
 
-model Professor {
-  id          String     @id @default(uuid())
-  nome        String
-  email       String
-  projetos    ProjetoToProfessor[]
-  matricula   String
-  curso       String
-  token       String?
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+model Aluno {
+  id        String           @id @default(uuid())
+  nome      String
+  email     String
+  matricula Int
+  curso     String
+  projeto   Projeto          @relation(fields: [projetoId], references: [id])
+  projetoId String
+  token     String?
+  status    Boolean
+  indicacao String
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
 }
 
-model Aluno {
-  id            String     @id @default(uuid())
-  nome          String     
-  email         String
-  matricula     String
-  curso         String
-  projetos      ProjetoToAluno[]
-  token         String?
-  status        Boolean
-  indicacao     String
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
+model Professor {
+  id        String               @id @default(uuid())
+  nome      String
+  email     String
+  matricula String
+  curso     String
+  token     String?
+  projeto   Projeto              @relation(fields: [projetoId], references: [id])
+  projetoId String
+  createdAt DateTime             @default(now())
+  updatedAt DateTime             @updatedAt
 }
 
 model Projeto {
-  id                  String                @id @default(uuid())
-  titulo              String
-  areaConhecimento    String
-  escola              String
-  status              String
-  professores         ProjetoToProfessor[]
-  alunos              ProjetoToAluno[]
-  createdAt           DateTime              @default(now())
-  updatedAt           DateTime              @updatedAt
-}
-
-model ProjetoToProfessor {
-  projeto     Projeto   @relation(fields: [projetoId], references: [id])
-  projetoId   String
-  professor   Professor @relation(fields: [professorId], references: [id])
-  professorId String
-
-  @@id([projetoId, professorId])
-}
-
-model ProjetoToAluno {
-  projeto   Projeto   @relation(fields: [projetoId], references: [id])
-  projetoId String
-  aluno     Aluno     @relation(fields: [alunoId], references: [id])
-  alunoId   String
-
-  @@id([projetoId, alunoId])
+  id               String               @id @default(uuid())
+  titulo           String
+  areaConhecimento String
+  escola           String
+  status           Boolean
+  createdAt        DateTime             @default(now())
+  updatedAt        DateTime             @updatedAt
+  Aluno            Aluno[]
+  Professor        Professor[]
 }
 
 model FormularioInscricao {
-  id                      String     @id @default(uuid())
+  id                      String   @id @default(uuid())
   email                   String
   nomeCompletoOrientador  String
   titulacao               String
@@ -106,6 +90,6 @@ model FormularioInscricao {
   certificadoMatricula    String
   obs1                    String?
   obs2                    String?
-  createdAt               DateTime   @default(now())
-  updatedAt               DateTime   @updatedAt
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
 }

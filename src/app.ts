@@ -1,12 +1,18 @@
 import express from 'express';
 import cors from 'cors';
-
+import professorRoutes from './routes/ProfessorRouter';
+import projetoRoutes from './routes/ProjetoRouter';
+import alunoRoutes from './routes/alunoRouter';
+import administradorRoutes from './routes/administradorRouter';
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.use();
+app.use(administradorRoutes);
+app.use(alunoRoutes);
+app.use(professorRoutes);
+app.use(projetoRoutes);
 
 
 

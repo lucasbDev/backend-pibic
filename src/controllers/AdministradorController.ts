@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import * as administradorService from '../services/Administrador';
 
 export async function criarAdministrador(req: Request, res: Response) {
-  const { nome, email } = req.body;
+  const { nome, email, } = req.body;
 
   const administrador = await administradorService.criarAdministrador({
     nome,
