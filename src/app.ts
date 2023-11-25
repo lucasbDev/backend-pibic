@@ -2,8 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import professorRoutes from './routes/ProfessorRouter';
 import projetoRoutes from './routes/ProjetoRouter';
-import alunoRoutes from './routes/alunoRouter';
-import administradorRoutes from './routes/administradorRouter';
+import alunoRoutes from './routes/AlunoRouter';
+import administradorRoutes from './routes/AdministradorRouter';
 
 const app = express();
 app.use(express.json());
