@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,52 +7,51 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Administrador {
-  id        String    @id @default(uuid())
+  id        String   @id @default(uuid())
   nome      String
   email     String
   token     String?
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Aluno {
-  id        String           @id @default(uuid())
+  id        String   @id @default(uuid())
   nome      String
   email     String
   matricula Int
   curso     String
-  projeto   Projeto          @relation(fields: [projetoId], references: [id])
+  projeto   Projeto  @relation(fields: [projetoId], references: [id])
   projetoId String
   token     String?
   status    Boolean
   indicacao String
-  createdAt DateTime         @default(now())
-  updatedAt DateTime         @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Professor {
-  id        String               @id @default(uuid())
+  id        String   @id @default(uuid())
   nome      String
   email     String
   matricula String
   curso     String
   token     String?
-  projeto   Projeto              @relation(fields: [projetoId], references: [id])
+  projeto   Projeto  @relation(fields: [projetoId], references: [id])
   projetoId String
-  createdAt DateTime             @default(now())
-  updatedAt DateTime             @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Projeto {
-  id               String               @id @default(uuid())
+  id               String      @id @default(uuid())
   titulo           String
   areaConhecimento String
   escola           String
   status           Boolean
-  createdAt        DateTime             @default(now())
-  updatedAt        DateTime             @updatedAt
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
   Aluno            Aluno[]
   Professor        Professor[]
 }
@@ -83,9 +81,6 @@ model FormularioInscricao {
   dataNascimento          DateTime
   telefoneAluno           Int
   linkLattes              String
-  planoTrabalho           String
-  historicoEscolar        String
-  certificadoMatricula    String
   obs1                    String?
   obs2                    String?
   createdAt               DateTime @default(now())
