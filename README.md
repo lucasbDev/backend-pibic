@@ -1,4 +1,4 @@
-# backend-pibic.
+# backend - PIBIC.
 ## Descrição
 - API desenvolvida para gestão pessoal do PIBIC
 
