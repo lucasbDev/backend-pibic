@@ -3,7 +3,6 @@ import cors from 'cors';
 import professorRoutes from './routes/ProfessorRouter';
 import projetoRoutes from './routes/ProjetoRouter';
 import alunoRoutes from './routes/AlunoRouter';
-import FormularioInscricaoRouter from './routes/FormularioInscricaoRouter';
 import administradorRoutes from './routes/AdministradorRouter';
 import multer from 'multer';
 import multerS3 from 'multer-s3';
@@ -45,11 +44,18 @@ app.post("/formulario/upload", upload.fields([
   return res.json('enviado com sucesso');
 });
 
+app.post("/formulario/prof/upload", upload.fields([
+  { name: 'CurriculoLattes' },
+  { name: 'GrupoPesquisa' },
+]), (req, res) => {
+  return res.json('enviado com sucesso');
+});
+
 app.use(administradorRoutes);
 app.use(alunoRoutes);
 app.use(professorRoutes);
 app.use(projetoRoutes);
-app.use(FormularioInscricaoRouter)
+//app.use(FormularioInscricaoRouter)
 
 app.listen(3000, () => {
   console.log('Servidor executando na porta 3000');

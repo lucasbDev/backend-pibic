@@ -1,19 +1,15 @@
-import { Request, Response } from 'express';
-import * as professorService from '../services/Professor';
+import { Request, Response } from "express";
+import * as professorService from "../services/Professor";
 
 export async function criarProfessor(req: Request, res: Response) {
-  const { nome, email, matricula, curso, projetoId } = req.body;
+  const { nome, email, matricula, curso } = req.body;
 
   const professor = await professorService.criarProfessor({
     nome,
     email,
     matricula,
-    curso,
-    projeto: {
-      connect: {
-        id: projetoId
-      }
-    }
+    curso
+    
   });
 
   res.json(professor);
@@ -31,7 +27,7 @@ export async function atualizarProfessor(req: Request, res: Response) {
   });
 
   if (!professor) {
-    return res.status(404).json({ error: 'Professor não encontrado' });
+    return res.status(404).json({ error: "Professor não encontrado" });
   }
 
   res.json(professor);
@@ -51,7 +47,7 @@ export async function obterProfessorPorId(req: Request, res: Response) {
   const professor = await professorService.obterProfessorPorId(id);
 
   if (!professor) {
-    return res.status(404).json({ error: 'Professor não encontrado' });
+    return res.status(404).json({ error: "Professor não encontrado" });
   }
 
   res.json(professor);
