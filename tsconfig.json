@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es2020",         // ou a versão do ECMAScript desejada
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",         // Define o diretório de saída para os arquivos compilados (.js)
+    "rootDir": "./src",         // Define o diretório de origem para os arquivos TypeScript (.ts)
+  },
+  "include": [
+    "src/**/*.ts"              // Inclui todos os arquivos .ts dentro do diretório src
+  ],
+  "exclude": [
+    "node_modules"              // Exclui o diretório node_modules
+  ]
+}

@@ -1,13 +1,22 @@
-import express from 'express';
-import cors from 'cors';
 import professorRoutes from './routes/ProfessorRouter';
 import projetoRoutes from './routes/ProjetoRouter';
 import alunoRoutes from './routes/AlunoRouter';
 import administradorRoutes from './routes/AdministradorRouter';
+import express from 'express';
+import cors from 'cors';
 import multer from 'multer';
-import multerS3 from 'multer-s3';
-import aws from 'aws-sdk';
-import AWS from 'aws-sdk';
+import  multerS3 from 'multer-s3';
+import * as aws from 'aws-sdk';
+import * as AWS from 'aws-sdk';
+import * as fs from 'fs';
+import * as https from 'https';
+import * as path from 'path';
+
+
+const keyPath = path.join(__dirname, 'cert', 'private.key');
+const certPath = path.join(__dirname, 'cert', 'certificate.crt');
+const caPath = path.join(__dirname, 'cert', 'ca_bundle.crt');
+const cred = { key: fs.readFileSync(keyPath), cert: fs.readFileSync(certPath), ca: fs.readFileSync(caPath) };
 
 require('dotenv').config();
 
@@ -36,6 +45,7 @@ app.use(cors());
 
 app.use("/uploads", express.static("/uploads"));
 
+
 app.post("/formulario/upload", upload.fields([
   { name: 'planoTrabalho' },
   { name: 'historicoEscolar' },
@@ -55,8 +65,13 @@ app.use(administradorRoutes);
 app.use(alunoRoutes);
 app.use(professorRoutes);
 app.use(projetoRoutes);
-//app.use(FormularioInscricaoRouter)
+
+
+
 
 app.listen(3000, () => {
   console.log('Servidor executando na porta 3000');
 });
+
+const httpsServer = https.createServer(cred,app)
+httpsServer.listen(8443)
